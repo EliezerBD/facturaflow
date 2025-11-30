@@ -7,7 +7,7 @@ WORKDIR /app
 # 3. Copiamos la "lista de ingredientes"
 COPY requirements.txt .
 
-# 4. Instalamos todos los ingredientes
+# 4. Instalamos todos los requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 5. Copiamos todo lo demás
