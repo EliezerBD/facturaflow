@@ -2,7 +2,7 @@
 
 Sistema completo de gestión y análisis de facturas electrónicas con integración a Gmail API, desarrollado con Flask, Docker y MariaDB.
 
-este se creo por la necesidad de no ir a gmail y buscar las facturas una a una por eso que se creo ya que donde trabajo no habia buscado una solucion y ya este es algo sencillo ya llevo un mes de desarrollo pero ya esta aqui para ser sincera he usado ia para algunas cosa que desconozco pero pero es frotend y de alli todo hay hay bugs que no puedo resolver pero espera en este mes subir esto a vps pero no tengo la economia para pagar un vps pero gracias por tu apoyo 
+este se creo por la necesidad de no ir a gmail y buscar las facturas una a una por eso que se creo ya que donde trabajo no habia buscado una solucion y ya este es algo sencillo ya llevo unos meses de desarrollo pero ya esta aqui para ser sincera he usado ia para algunas cosa que desconozco pero pero es frotend y de alli todo hay hay bugs que no puedo resolver pero espera en este mes subir esto a vps pero no tengo la economia para pagar un vps pero gracias por tu apoyo 
 
 ##  Características
 -  Autenticación OAuth2 con Google
