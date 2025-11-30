@@ -1,4 +1,4 @@
-# "Instrucciones versión 3.8" (Lo quitamos por el 'warning' que te dio)
+# "Instrucciones versión 3.8" 
 services:
   # --- 1. El servicio de Base de Datos ---
   db:
@@ -15,7 +15,7 @@ services:
     networks:
       - mi_red_local
 
-  # --- 2. El servicio de phpMyAdmin (SIN CAMBIOS) ---
+  # --- 2. El servicio de phpMyAdmin 
   phpmyadmin:
     image: phpmyadmin:latest
     container_name: mi_phpmyadmin
@@ -30,9 +30,9 @@ services:
     depends_on:
       - db
 
-  # --- 3. ¡NUEVO! Tu aplicación de Flask ---
+ 
   api:
-    # "Construye este contenedor usando el Dockerfile de esta carpeta"
+   
     build:
       context: ..
       dockerfile: docker/Dockerfile
