@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema de Gestión de Facturas</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="estadistica.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Overlay for mobile -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- Sidebar (starts collapsed) -->
+        <div class="sidebar collapsed">
+            <div class="logo">
+                <h1>
+                    <i class="fas fa-chart-pie"></i> Gestion fac
+                </h1>
+                <button class="sidebar-close" id="sidebarClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li class="active">
+                    <a href="#">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-search"></i> Búsqueda Avanzada
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-file-invoice"></i> Gestión de Facturas
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-cogs"></i> Configuración
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content (starts expanded) -->
+        <div class="main-content expanded">
+            <div class="header">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h2>Dashboard de Estadísticas</h2>
+                <div class="user-info">
+                    <div class="user-avatar">JD</div>
+                    <div>
+                        <div>Juan Díaz</div>
+                        <div style="font-size: 0.8rem; color: var(--gray);">Administrador</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-cards">
+                <div class="stat-card primary">
+                    <div class="stat-card-header">
+                        <div class="stat-card-title">Salidas Totales</div>
+                        <div class="stat-card-icon primary">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card-value">1,248</div>
+                    <div class="stat-card-change positive">
+                        <i class="fas fa-arrow-up"></i> +12% desde ayer
+                    </div>
+                </div>
+
+                <div class="stat-card success">
+                    <div class="stat-card-header">
+                        <div class="stat-card-title">Documentos Procesados</div>
+                        <div class="stat-card-icon success">
+                            <i class="fas fa-inbox"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card-value">42</div>
+                    <div class="stat-card-change positive">
+                        <i class="fas fa-arrow-up"></i> +5% que ayer
+                    </div>
+                </div>
+
+                <div class="stat-card warning">
+                    <div class="stat-card-header">
+                        <div class="stat-card-title">Cargos Recurrentes</div>
+                        <div class="stat-card-icon warning">
+                            <i class="fas fa-paperclip"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card-value">856</div>
+                    <div class="stat-card-change positive">
+                        <i class="fas fa-arrow-up"></i> +8% desde ayer
+                    </div>
+                </div>
+
+                <div class="stat-card info">
+                    <div class="stat-card-header">
+                        <div class="stat-card-title">Gasto en Materiales</div>
+                        <div class="stat-card-icon info">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card-value">324</div>
+                    <div class="stat-card-change positive">
+                        <i class="fas fa-arrow-up"></i> +15% desde ayer
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-section">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Distribución del Gasto</div>
+                        <div class="chart-actions">
+                            <select id="timeRange">
+                                <option value="7d">Últimos 7 días</option>
+                                <option value="30d" selected>Últimos 30 días</option>
+                                <option value="90d">Últimos 90 días</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper doughnut-wrapper">
+                        <canvas id="docTypeChart"></canvas>
+                    </div>
+                    <div id="docTypeLegend" class="chart-legend"></div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Historial de Gasto Mensual</div>
+                        <div class="chart-actions">
+                            <select id="docTypeFilter">
+                                <option value="all" selected>Todos</option>
+                                <option value="factura">Facturas</option>
+                                <option value="recibo">Recibos</option>
+                                <option value="cotizacion">Cotizaciones</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                    <div id="trendLegend" class="chart-legend"></div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="recent-activity">
+                <div class="chart-header">
+                    <div class="chart-title">Bitácora de Facturas Pagadas</div>
+                    <div class="chart-actions">
+                        <select id="activityFilter">
+                            <option value="all" selected>Todas</option>
+                            <option value="factura">Facturas</option>
+                            <option value="recibo">Recibos</option>
+                            <option value="cotizacion">Cotizaciones</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="activitySearch" placeholder="Buscar en actividad...">
+                </div>
+                <ul class="activity-list" id="activityList">
+                    <li class="activity-item" data-type="factura">
+                        <div class="activity-icon factura">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="activity-details">
+                            <div class="activity-title">Factura #F-2023-0456</div>
+                            <div class="activity-meta">
+                                <span><i class="fas fa-building"></i> Amazon Web Services</span>
+                                <span><i class="far fa-clock"></i> Hace 2 horas</span>
+                            </div>
+                        </div>
+                        <div class="activity-amount">$245.50</div>
+                    </li>
+                    <li class="activity-item" data-type="recibo">
+                        <div class="activity-icon recibo">
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                        <div class="activity-details">
+                            <div class="activity-title">Recibo de Pago</div>
+                            <div class="activity-meta">
+                                <span><i class="fas fa-building"></i> Servicios Públicos</span>
+                                <span><i class="far fa-clock"></i> Hace 5 horas</span>
+                            </div>
+                        </div>
+                        <div class="activity-amount">$89.30</div>
+                    </li>
+                    <li class="activity-item" data-type="cotizacion">
+                        <div class="activity-icon cotizacion">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="activity-details">
+                            <div class="activity-title">Cotización Proyecto X</div>
+                            <div class="activity-meta">
+                                <span><i class="fas fa-building"></i> ProveedorTech</span>
+                                <span><i class="far fa-clock"></i> Hace 1 día</span>
+                            </div>
+                        </div>
+                        <div class="activity-amount">$1,250.00</div>
+                    </li>
+                    <li class="activity-item" data-type="factura">
+                        <div class="activity-icon factura">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="activity-details">
+                            <div class="activity-title">Factura #INV-9876</div>
+                            <div class="activity-meta">
+                                <span><i class="fas fa-building"></i> Google Cloud</span>
+                                <span><i class="far fa-clock"></i> Hace 1 día</span>
+                            </div>
+                        </div>
+                        <div class="activity-amount">$156.75</div>
+                    </li>
+                    <li class="activity-item" data-type="recibo">
+                        <div class="activity-icon recibo">
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                        <div class="activity-details">
+                            <div class="activity-title">Recibo de Suscripción</div>
+                            <div class="activity-meta">
+                                <span><i class="fas fa-building"></i> Adobe Creative Cloud</span>
+                                <span><i class="far fa-clock"></i> Hace 2 días</span>
+                            </div>
+                        </div>
+                        <div class="activity-amount">$52.99</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer">
+                <p>Sistema de Gestión de Facturas con Gmail &copy; 2025 - Todos los derechos reservados</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación -->
+    <div class="notification" id="notification">
+        <div id="notificationMessage">Datos actualizados correctamente</div>
+    </div>
+
+    <script src="estadistica.js"></script>
+</body>
+
+</html>
