@@ -91,7 +91,7 @@ Para usar la integración con Gmail, necesitas crear credenciales de OAuth2:
 
 > **Nota:** El archivo `credentials.json` NO se sube a Git por seguridad (está en `.gitignore`)
 
-### 4️⃣ Construir y ejecutar con Docker
+### 4️ Construir y ejecutar con Docker
 
 ```bash
 # Navega a la carpeta de Docker
@@ -107,7 +107,7 @@ Esto iniciará 4 servicios:
 - **Dashboard Frontend** → http://localhost:8082
 - **Base de datos MariaDB** (puerto interno 3306)
 
-### 5️⃣ Verificar que todo funciona
+### 5️ Verificar que todo funciona
 
 ```bash
 # Ver el estado de los contenedores
@@ -117,7 +117,7 @@ docker-compose ps
 docker-compose logs -f api
 ```
 
-## 🌐 Acceso a los Servicios
+## Acceso a los Servicios
 
 | Servicio | URL | Descripción |
 |----------|-----|-------------|
@@ -131,7 +131,7 @@ docker-compose logs -f api
 - **Usuario:** El configurado en `DB_USER` (config.env)
 - **Contraseña:** La configurada en `DB_PASSWORD` (config.env)
 
-## 📁 Estructura del Proyecto
+##  Estructura del Proyecto
 
 ```
 docker-test/
@@ -156,7 +156,7 @@ docker-test/
 └── README.md                   # Este archivo
 ```
 
-## 🔄 Comandos Útiles de Docker
+##  Comandos Útiles de Docker
 
 ```bash
 # Iniciar los contenedores
@@ -261,7 +261,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 - GitHub: [@EliezerBD](https://github.com/EliezerBD)
 - Email: eliezerdba@gmail.com
 
-## 🙏 Agradecimientos
+##  Agradecimientos
 
 - Flask Documentation
 - Docker Documentation
