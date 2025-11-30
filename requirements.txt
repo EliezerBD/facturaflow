@@ -1,0 +1,10 @@
+flask
+flask-cors
+flask-limiter
+mysql-connector-python
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+requests
+gunicorn
+python-dotenv
